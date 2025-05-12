@@ -536,7 +536,7 @@
         async function loadData() {
             try {
                 // Path to your JSON file in the data directory
-                const dataUrl = './data/motions.json';
+                const dataUrl = 'https://github.com/idowolf/debatemotions/raw/refs/heads/main/data/motions.json';
                 
                 // Load data with progress tracking
                 const data = await loadDataWithProgress(dataUrl);
@@ -546,21 +546,9 @@
                 loadMore();
                 
             } catch (error) {
-                // If the main file fails, try a direct path
-                try {
-                    const fallbackUrl = 'data/motions.json';
-                    const response = await fetch(fallbackUrl);
-                    const data = await response.json();
-                    
-                    allMotions = data.motions || [];
-                    filteredMotions = allMotions;
-                    loadMore();
-                    
-                } catch (fallbackError) {
-                    document.getElementById('tableBody').innerHTML = 
-                        '<tr><td colspan="6" class="error">Error loading data. Please ensure the JSON file is properly uploaded with Git LFS.</td></tr>';
-                    console.error('Error loading data:', error, fallbackError);
-                }
+                document.getElementById('tableBody').innerHTML = 
+                    '<tr><td colspan="6" class="error">Error loading data. Please ensure the JSON file is properly uploaded with Git LFS.</td></tr>';
+                console.error('Error loading data:', error, fallbackError);
             }
         }
         
