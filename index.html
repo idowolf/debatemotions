@@ -536,7 +536,7 @@
         async function loadData() {
             try {
                 // Path to your JSON file in the data directory
-                const dataUrl = 'https://github.com/idowolf/debatemotions/raw/refs/heads/main/data/motions.json';
+                const dataUrl = './data/motions_new.json';
                 
                 // Load data with progress tracking
                 const data = await loadDataWithProgress(dataUrl);
@@ -546,9 +546,10 @@
                 loadMore();
                 
             } catch (error) {
+
                 document.getElementById('tableBody').innerHTML = 
                     '<tr><td colspan="6" class="error">Error loading data. Please ensure the JSON file is properly uploaded with Git LFS.</td></tr>';
-                console.error('Error loading data:', error, fallbackError);
+                console.error('Error loading data:', error);
             }
         }
         
